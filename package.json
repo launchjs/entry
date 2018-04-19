@@ -1,0 +1,55 @@
+{
+  "name": "@launch/entry",
+  "version": "1.0.0",
+  "description": "Launch.js - Simple client/server entry plugin",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "lint": "tslint --project .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/launchjs/entry.git"
+  },
+  "keywords": [
+    "launch.js",
+    "webpack",
+    "entry",
+    "plugin"
+  ],
+  "author": "Lee Benson <lee@leebenson.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/launchjs/entry/issues"
+  },
+  "homepage": "https://github.com/launchjs/entry#readme",
+  "devDependencies": {
+    "@launch/app": "^0.24.0",
+    "@types/jest": "^22.2.3",
+    "jest": "^22.4.3",
+    "ts-jest": "^22.4.4",
+    "tslint": "^5.9.1"
+  },
+  "dependencies": {
+    "caller": "^1.0.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(t|j)sx?$": "ts-jest"
+    },
+    "testEnvironment": "node",
+    "testRegex": "__tests__/.+\\.(test|spec)\\.tsx?$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ]
+  }
+}

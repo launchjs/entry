@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es2015",
+      "esnext"
+    ],
+    "module": "commonjs",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "./dist",
+    "removeComments": true,
+    "sourceMap": false,
+    "strict": true,
+    "target": "es2017"
+  },
+  "exclude": [
+    "dist",
+    "__tests__",
+    "wallaby.js"
+  ]
+}
