@@ -3,8 +3,12 @@
 // ----------------------------------------------------------------------------
 // IMPORTS
 
+/* Node */
+import * as path from "path";
+
 /* NPM */
 import App, { Config, ILaunchConfig } from "@launch/app";
+import * as getPort from "get-port";
 
 /* Local */
 import EntryPlugin from "../src/entry";
@@ -24,22 +28,51 @@ function getBaseConfig(app: App): ILaunchConfig {
   };
 }
 
+async function newApp() {
+  const app = new App()
+    .silent()
+    .production(false)
+    .port(await getPort());
+
+  return app;
+}
+
 describe("src/entry.ts", () => {
-  test("should set client/server entries", () => {
-    const app = new App().production(false);
+  test("should set client/server entries", async () => {
+    const app = await newApp();
     const baseConfig = getBaseConfig(app);
 
     // Expected entries
-    const clientEntry = "__helpers__/fakeClientEntry.ts";
-    const serverEntry = "__helpers__/fakeServerEntry.ts";
+    const clientEntry = "./__helpers__/fakeClientEntry.ts";
+    const serverEntry = "./__helpers__/fakeServerEntry.ts";
 
     const entryPlugin = new EntryPlugin()
-      .client(clientEntry)
-      .server(serverEntry);
+      .client(require.resolve(clientEntry))
+      .server(require.resolve(serverEntry));
 
     const config = entryPlugin.initLaunchJs(baseConfig, app);
 
-    expect(config.client.config.entry!).toMatch(clientEntry);
-    expect(config.server.config.entry!).toMatch(serverEntry);
+    console.log(config.client.config.entry!);
+
+    expect(config.client.config.entry!).toMatchObject([path.resolve(__dirname, clientEntry)]);
+    expect(config.server.config.entry!).toMatchObject([path.resolve(__dirname, serverEntry)]);
+  });
+
+  test("should work as a Launch.js plugin", async () => {
+    const app = await newApp();
+
+    // Expected entries
+    const clientEntry = "./__helpers__/fakeClientEntry.ts";
+    const serverEntry = "./__helpers__/fakeServerEntry.ts";
+
+    const entryPlugin = new EntryPlugin()
+      .client(require.resolve(clientEntry))
+      .server(require.resolve(serverEntry));
+
+    app.plugin(entryPlugin);
+
+    const server = await app.build();
+
+    server.close();
   });
 });

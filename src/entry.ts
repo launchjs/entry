@@ -5,7 +5,6 @@
 
 /* Node */
 import * as fs from "fs";
-import * as path from "path";
 
 /* NPM */
 import App, {
@@ -42,12 +41,16 @@ export default class EntryPlugin implements ILaunchPlugin {
 
   // Set client entry point
   public client(file: string): this {
-    return this.entry(path.resolve(path.dirname(caller()), file), "client");
+    cache.get(this)!.client = file;
+
+    return this;
   }
 
   // Set server entry point
   public server(file: string): this {
-    return this.entry(path.resolve(path.dirname(caller()), file), "server");
+    cache.get(this)!.server = file;
+
+    return this;
   }
 
   /* LAUNCH.JS */
@@ -71,20 +74,10 @@ export default class EntryPlugin implements ILaunchPlugin {
 
       // All good - merge the config
       config[key].merge({
-        entry: c[key],
+        entry: [c[key]!],
       });
     });
 
     return config;
-  }
-
-  // --------------------------------------------------------------------------
-  /* PRIVATE METHODS */
-  // --------------------------------------------------------------------------
-
-  public entry(file: string, type: keyof IEntryConfig): this {
-    cache.get(this)![type] = file; /*?*/
-
-    return this;
   }
 }

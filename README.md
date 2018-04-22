@@ -15,8 +15,8 @@ import EntryPlugin from "@launch/entry";
 void new App()
   .plugin(
     new EntryPlugin()
-      .client("path/to/clientEntry.tsx")
-      .server("path/to/serverEntry.tsx")
+      .client(require.resolve("./path/to/clientEntry.tsx"))
+      .server(require.resolve("./path/to/serverEntry.tsx"))
   )
   .launch()
 ```
