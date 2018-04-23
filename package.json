@@ -1,12 +1,13 @@
 {
   "name": "@launch/entry",
-  "version": "1.5.0",
+  "version": "1.7.0",
   "description": "Launch.js - Simple client/server entry plugin",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "lint": "tslint --project .",
+    "prepublishOnly": "npm run lint && npm run build",
     "test": "jest"
   },
   "repository": {
