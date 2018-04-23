@@ -1,6 +1,6 @@
 {
   "name": "@launch/entry",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Launch.js - Simple client/server entry plugin",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/launchjs/entry#readme",
   "devDependencies": {
-    "@launch/app": "^0.24.0",
+    "@launch/app": "^0.26.0",
     "@types/get-port": "^3.2.0",
     "@types/jest": "^22.2.3",
     "get-port": "^3.2.0",
@@ -34,9 +34,7 @@
     "ts-jest": "^22.4.4",
     "tslint": "^5.9.1"
   },
-  "dependencies": {
-    "caller": "^1.0.1"
-  },
+  "dependencies": {},
   "jest": {
     "transform": {
       "^.+\\.(t|j)sx?$": "ts-jest"

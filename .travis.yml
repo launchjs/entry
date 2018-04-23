@@ -1,0 +1,9 @@
+sudo: false
+dist: trusty
+services:
+  - docker
+before_install:
+  - docker build -t launchjs_entry .
+script:
+  - docker run launchjs_entry npm run lint
+  - docker run launchjs_entry npm test

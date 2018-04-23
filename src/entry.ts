@@ -20,9 +20,6 @@ export interface IEntryConfig {
   server?: string;
 }
 
-// Get the calling file
-const caller = require("caller");
-
 // Cache config
 const cache = new WeakMap<EntryPlugin, IEntryConfig>();
 
